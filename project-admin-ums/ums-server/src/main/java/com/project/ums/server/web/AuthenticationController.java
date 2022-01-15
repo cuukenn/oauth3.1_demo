@@ -1,20 +1,24 @@
 package com.project.ums.server.web;
 
-import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.crypto.digest.MD5;
 import com.project.common.api.ApiResult;
 import com.project.common.exception.BizException;
 import com.project.common.util.CaptchaUtil;
 import com.project.common.util.RegexUtil;
-import com.project.security.annotation.DeleteAnonymousAccess;
 import com.project.security.annotation.GetAnonymousAccess;
 import com.project.security.annotation.PostAnonymousAccess;
-import com.project.ums.server.dto.AuthUserDTO;
+import com.project.security.component.TokenProvider;
+import com.project.security.pojo.TokenPair;
+import com.project.security.service.ICaptchaService;
+import com.project.security.service.IOnlineUserService;
+import com.project.ums.server.poj.AuthUserDTO;
+import com.project.ums.server.poj.CaptchaDTO;
+import com.project.ums.server.poj.PasswordAuthQuery;
 import com.wf.captcha.base.Captcha;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.AccountStatusException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -28,7 +32,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import security.service.ICaptchaService;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.Max;
@@ -45,34 +48,38 @@ import java.util.Objects;
 public class AuthenticationController {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final ICaptchaService captchaService;
+    private final IOnlineUserService onlineUserService;
+    private final TokenProvider tokenProvider;
 
     /**
      * 用户登陆
      *
-     * @param authUserDTO 登陆DTO
+     * @param passwordAuthQuery 登陆DTO
      * @return 登陆结果
      */
     @PostMapping(value = "/login")
     @PostAnonymousAccess
-    public ApiResult<Object> login(AuthUserDTO authUserDTO) {
-        ApiResult<Object> response;
+    public ApiResult<AuthUserDTO> login(PasswordAuthQuery passwordAuthQuery) {
+        ApiResult<AuthUserDTO> response;
         try {
-            String exceptedCaptcha = captchaService.removeIfAbstract(authUserDTO.getCaptchaId());
+            String exceptedCaptcha = captchaService.removeIfAbstract(passwordAuthQuery.getCaptchaId());
             if (exceptedCaptcha == null) {
                 throw new BizException("验证码失效");
             }
-            if (!Objects.equals(exceptedCaptcha, authUserDTO.getCaptchaCode())) {
+            if (!Objects.equals(exceptedCaptcha, passwordAuthQuery.getCaptchaCode())) {
                 throw new BizException("验证码错误");
             }
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                    authUserDTO.getUsername(),
-                    authUserDTO.getPassword()
+                    passwordAuthQuery.getUsername(),
+                    passwordAuthQuery.getPassword()
             );
             Authentication authenticate = authenticationManagerBuilder.getObject().authenticate(authentication);
             SecurityContextHolder.getContext().setAuthentication(authenticate);
-            String token = null;
-            // 返回 token 与 用户信息
-            response = ApiResult.success(MapUtil.builder().put("token", token).put("user", null).build());
+            //创建令牌对、并保存令牌队
+            TokenPair tokenPair = tokenProvider.createTokenPair(authentication);
+            onlineUserService.save(tokenPair, passwordAuthQuery.isRememberMe());
+            // 返回认证信息
+            response = ApiResult.success(new AuthUserDTO(tokenPair.getToken(), tokenPair.getRefreshToken()));
         } catch (UsernameNotFoundException exception) {
             response = ApiResult.fail("用户名或密码错误");
             log.error("auth failed", exception);
@@ -99,15 +106,32 @@ public class AuthenticationController {
     @PostMapping(value = "/fakeLogin")
     @PostAnonymousAccess
     @Profile({"dev", "test"})
-    public ApiResult<Object> login(String username, String password) {
+    public ApiResult<AuthUserDTO> login(String username, String password) {
         String captchaCode = "only for test";
         String captchaId = captchaService.save(captchaCode);
-        AuthUserDTO authUserDTO = new AuthUserDTO();
-        authUserDTO.setUsername(username);
-        authUserDTO.setPassword(MD5.create().digestHex(password, StandardCharsets.UTF_8));
-        authUserDTO.setCaptchaId(captchaId);
-        authUserDTO.setCaptchaCode(captchaCode);
-        return login(authUserDTO);
+        PasswordAuthQuery passwordAuthQuery = new PasswordAuthQuery();
+        passwordAuthQuery.setUsername(username);
+        passwordAuthQuery.setPassword(MD5.create().digestHex(password, StandardCharsets.UTF_8));
+        passwordAuthQuery.setCaptchaId(captchaId);
+        passwordAuthQuery.setCaptchaCode(captchaCode);
+        return login(passwordAuthQuery);
+    }
+
+    /**
+     * 使用刷新令牌重新获取token
+     *
+     * @param token        令牌
+     * @param refreshToken 刷新令牌
+     * @return 登陆结果
+     */
+    @PostMapping(value = "/refreshToken")
+    @PostAnonymousAccess
+    public ApiResult<AuthUserDTO> refreshToken(String token, String refreshToken) {
+        TokenPair tokenPair = new TokenPair(token, refreshToken);
+        Assert.isTrue(onlineUserService.validate(tokenPair), () -> new BizException("refreshToken失败,请重新登陆"));
+        tokenPair = tokenProvider.refreshToken(tokenPair);
+        onlineUserService.refresh(tokenPair);
+        return ApiResult.success(new AuthUserDTO(tokenPair.getToken(), tokenPair.getRefreshToken()));
     }
 
     /**
@@ -118,7 +142,7 @@ public class AuthenticationController {
      */
     @GetMapping(value = "/captchaCode")
     @GetAnonymousAccess
-    public ApiResult<Object> getCaptchaCode(HttpServletResponse response) {
+    public ApiResult<CaptchaDTO> getCaptchaCode(HttpServletResponse response) {
         return getCaptchaCode(130, 48, response);
     }
 
@@ -132,9 +156,9 @@ public class AuthenticationController {
      */
     @GetMapping(value = "/captchaCode/{captchaWidth}/{captchaHeight}")
     @GetAnonymousAccess
-    public ApiResult<Object> getCaptchaCode(@PathVariable("captchaWidth") @Max(1920) @Min(130) Integer captchaWidth,
-                                            @PathVariable("captchaHeight") @Max(1080) @Min(48) Integer captchaHeight,
-                                            HttpServletResponse response) {
+    public ApiResult<CaptchaDTO> getCaptchaCode(@PathVariable("captchaWidth") @Max(1920) @Min(130) Integer captchaWidth,
+                                                @PathVariable("captchaHeight") @Max(1080) @Min(48) Integer captchaHeight,
+                                                HttpServletResponse response) {
         // 获取运算的结果
         Captcha captcha = CaptchaUtil.getCaptcha(captchaWidth, captchaHeight);
         //当验证码类型为 arithmetic时且长度 >= 2 时，captcha.text()的结果有几率为浮点型
@@ -144,9 +168,11 @@ public class AuthenticationController {
         }
         String id = captchaService.save(captchaValue);
         //add no cache headers
-        com.wf.captcha.utils.CaptchaUtil.setHeader(response);
+        response.setHeader("Pragma", "No-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setDateHeader("Expires", 0);
         // 验证码信息
-        return ApiResult.success(MapUtil.builder().put("captchaId", id).put("captchaIdImg", captcha.toBase64()));
+        return ApiResult.success(new CaptchaDTO(id, captcha.toBase64()));
     }
 
     /**
@@ -154,22 +180,10 @@ public class AuthenticationController {
      *
      * @return 结果
      */
-    @DeleteAnonymousAccess
     @DeleteMapping(value = "/logout")
     public ApiResult<String> logout() {
-        return ApiResult.success();
-    }
-
-    /**
-     * 踢人
-     *
-     * @param token 令牌
-     * @return 结果
-     */
-    @SuppressWarnings("SpellCheckingInspection")
-    @DeleteMapping(value = "/kickout")
-    @Secured("ADMIN")
-    public ApiResult<Void> kickOut(String token) {
+        onlineUserService.logout();
+        SecurityContextHolder.clearContext();
         return ApiResult.success();
     }
 }

@@ -21,7 +21,6 @@ public final class ApiException extends BizException {
      *
      * @param message 消息
      */
-    @SuppressWarnings("unused")
     private ApiException(String message) {
         super(message);
         this.code = null;

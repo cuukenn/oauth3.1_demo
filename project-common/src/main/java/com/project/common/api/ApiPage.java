@@ -1,5 +1,7 @@
 package com.project.common.api;
 
+import com.project.common.poj.BaseDTO;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
 
@@ -12,9 +14,8 @@ import java.util.List;
  * @author changgg
  */
 @Data
-@Builder
-@SuppressWarnings("rawtypes")
-public class ApiPage<T extends List> implements Serializable {
+@Builder(access = AccessLevel.MODULE)
+public class ApiPage<T extends List<V>, V extends BaseDTO> implements Serializable {
     private static final long serialVersionUID = -3318767403465787461L;
     private Integer pageNumber;
     private Integer pageSize;

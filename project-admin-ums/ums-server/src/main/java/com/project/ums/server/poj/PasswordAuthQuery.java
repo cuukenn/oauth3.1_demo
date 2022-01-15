@@ -1,4 +1,4 @@
-package com.project.ums.server.dto;
+package com.project.ums.server.poj;
 
 import lombok.Data;
 import lombok.ToString;
@@ -7,11 +7,13 @@ import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 /**
+ * 用户密码认证Query
+ *
  * @author changgg
  */
 @Data
 @ToString
-public class AuthUserDTO implements Serializable {
+public class PasswordAuthQuery implements Serializable {
     private static final long serialVersionUID = 8705202831771159629L;
     /**
      * 用户名
@@ -35,5 +37,5 @@ public class AuthUserDTO implements Serializable {
     /**
      * 是否记住我
      */
-    private Boolean rememberMe;
+    private boolean rememberMe;
 }

@@ -1,4 +1,4 @@
-package com.project.common.exception;
+package com.project.common.autoconfig;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -7,12 +7,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 开启全局异常
+ * 关闭非统一返回API的提示
  *
  * @author changgg
  */
-@Documented
-@Target(ElementType.TYPE)
+@Target(value = {ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface EnableGlobalException {
+@Documented
+public @interface IgnoreResponseWarn {
 }

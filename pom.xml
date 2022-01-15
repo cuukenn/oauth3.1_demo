@@ -137,26 +137,6 @@
                         </excludes>
                     </resource>
                 </resources>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-jar-plugin</artifactId>
-                        <configuration>
-                            <archive>
-                                <!--打jar移除pom.xml描述信息-->
-                                <addMavenDescriptor>false</addMavenDescriptor>
-                            </archive>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <artifactId>maven-war-plugin</artifactId>
-                        <configuration>
-                            <archive>
-                                <!--打war移除pom.xml描述信息-->
-                                <addMavenDescriptor>false</addMavenDescriptor>
-                            </archive>
-                        </configuration>
-                    </plugin>
-                </plugins>
             </build>
         </profile>
     </profiles>

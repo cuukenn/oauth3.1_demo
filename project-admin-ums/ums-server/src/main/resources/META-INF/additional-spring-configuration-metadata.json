@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "app.log.path",
+      "type": "java.lang.String",
+      "description": "日志文件位置."
+    }
+  ]
+}

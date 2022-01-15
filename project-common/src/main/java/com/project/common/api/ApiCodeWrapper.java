@@ -1,6 +1,5 @@
 package com.project.common.api;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -10,7 +9,6 @@ import lombok.ToString;
  */
 @Data
 @RequiredArgsConstructor
-@Builder
 @ToString
 public final class ApiCodeWrapper implements ApiCode {
     private final String code;
