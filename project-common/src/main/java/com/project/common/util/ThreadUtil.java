@@ -1,8 +1,12 @@
 package com.project.common.util;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * @author changgg
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ThreadUtil {
     /**
      * 使用默认值获取合适的线程大小

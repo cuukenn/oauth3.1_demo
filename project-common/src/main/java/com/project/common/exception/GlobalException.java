@@ -20,28 +20,28 @@ import javax.validation.ValidationException;
 public class GlobalException {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.OK)
-    public ApiResult<Object> handle(ApiException exception) {
-        log.error("api异常,code:[{}],msg:[{}]", exception.getCode(), exception.getMessage());
+    public ApiResult<String> handle(ApiException exception) {
+        log.error("API异常,code:[{}],msg:[{}]", exception.getCode(), exception.getMessage());
         return ApiResult.of(exception.getCode(), exception.getMessage());
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.OK)
-    public ApiResult<Object> handle(BizException exception) {
-        log.error("业务异常,code:[{}],msg:[{}]", ApiCodes.ERROR, exception.getMessage());
+    public ApiResult<Void> handle(BizException exception) {
+        log.error("功能异常,code:[{}],msg:[{}]", ApiCodes.ERROR, exception.getMessage());
         return ApiResult.of(ApiCodes.ERROR);
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.OK)
-    public ApiResult<Object> handle(ValidationException exception) {
+    public ApiResult<Void> handle(ValidationException exception) {
         log.error("参数异常,code:[{}],msg:[{}]", ApiCodes.PARAM_ERROR, exception.getMessage());
         return ApiResult.of(ApiCodes.PARAM_ERROR);
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.OK)
-    public ApiResult<Object> handle(Throwable exception) {
+    public ApiResult<Void> handle(Throwable exception) {
         log.error("系统异常", exception);
         return ApiResult.of(ApiCodes.ERROR);
     }

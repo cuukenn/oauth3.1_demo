@@ -36,12 +36,13 @@
         <smartdoc.version>2.3.6</smartdoc.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
+        <easy-captcha.version>1.6.2</easy-captcha.version>
     </properties>
 
     <!--子项目依赖版本统一管理-->
     <dependencyManagement>
-        <!--项目依赖版本-->
         <dependencies>
+            <!--项目依赖版本-->
             <dependency>
                 <groupId>org.example</groupId>
                 <artifactId>project-common</artifactId>
@@ -90,10 +91,17 @@
                 <artifactId>mapstruct</artifactId>
                 <version>${mapstruct.version}</version>
             </dependency>
+            <!--java验证框架-->
             <dependency>
                 <groupId>javax.validation</groupId>
                 <artifactId>validation-api</artifactId>
                 <version>${validation-api.version}</version>
+            </dependency>
+            <!--验证码-->
+            <dependency>
+                <groupId>com.github.whvcse</groupId>
+                <artifactId>easy-captcha</artifactId>
+                <version>${easy-captcha.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -129,6 +137,26 @@
                         </excludes>
                     </resource>
                 </resources>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-jar-plugin</artifactId>
+                        <configuration>
+                            <archive>
+                                <!--打jar移除pom.xml描述信息-->
+                                <addMavenDescriptor>false</addMavenDescriptor>
+                            </archive>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <configuration>
+                            <archive>
+                                <!--打war移除pom.xml描述信息-->
+                                <addMavenDescriptor>false</addMavenDescriptor>
+                            </archive>
+                        </configuration>
+                    </plugin>
+                </plugins>
             </build>
         </profile>
     </profiles>

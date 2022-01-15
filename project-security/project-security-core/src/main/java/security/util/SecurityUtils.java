@@ -3,6 +3,8 @@ package com.project.security.util;
 import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONObject;
 import com.project.common.exception.BizException;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.core.Authentication;
@@ -14,7 +16,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  * @author changgg
  */
 @Slf4j
-public class SecurityUtils {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class SecurityUtils {
 
     /**
      * 获取当前登录的用户

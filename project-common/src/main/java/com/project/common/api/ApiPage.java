@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 分页数据模型
@@ -12,7 +13,8 @@ import java.io.Serializable;
  */
 @Data
 @Builder
-public class ApiPage<T> implements Serializable {
+@SuppressWarnings("rawtypes")
+public class ApiPage<T extends List> implements Serializable {
     private static final long serialVersionUID = -3318767403465787461L;
     private Integer pageNumber;
     private Integer pageSize;
