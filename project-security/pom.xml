@@ -15,17 +15,18 @@
         <module>project-security-annotation</module>
         <module>project-security-core</module>
     </modules>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>org.example</groupId>
                 <artifactId>project-security-annotation</artifactId>
-                <version>${parent.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.example</groupId>
                 <artifactId>project-security-core</artifactId>
-                <version>${parent.version}</version>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

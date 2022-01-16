@@ -47,15 +47,18 @@
                 <groupId>org.example</groupId>
                 <artifactId>project-common</artifactId>
                 <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.example</groupId>
-                <artifactId>project-gateway</artifactId>
-                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>org.example</groupId>
                 <artifactId>project-security</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.example</groupId>
+                <artifactId>project-gateway</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!--spring cloud alibaba依赖控制-->

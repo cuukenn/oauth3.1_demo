@@ -13,7 +13,7 @@
     <dependencies>
         <dependency>
             <groupId>org.example</groupId>
-            <artifactId>project-common</artifactId>
+            <artifactId>project-common-core</artifactId>
         </dependency>
     </dependencies>
 </project>
