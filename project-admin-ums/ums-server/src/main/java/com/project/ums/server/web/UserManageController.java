@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @author changgg
  */
 @RestController
-@RequestMapping("/user-manage")
+@RequestMapping("/api/user-manage")
 public class UserManageController {
 }

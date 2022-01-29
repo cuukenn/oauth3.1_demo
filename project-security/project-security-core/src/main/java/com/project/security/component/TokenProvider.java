@@ -1,6 +1,5 @@
 package com.project.security.component;
 
-import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.KeyUtil;
@@ -9,7 +8,8 @@ import cn.hutool.jwt.JWTUtil;
 import cn.hutool.jwt.signers.AlgorithmUtil;
 import cn.hutool.jwt.signers.JWTSigner;
 import cn.hutool.jwt.signers.JWTSignerUtil;
-import com.project.common.exception.BizException;
+import com.project.core.exception.BizException;
+import com.project.core.util.Assert;
 import com.project.security.config.JwtProperties;
 import com.project.security.pojo.TokenPair;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +30,8 @@ import java.util.Collection;
 import java.util.Date;
 
 /**
+ * 令牌处理器
+ *
  * @author changgg
  */
 @Slf4j

@@ -1,8 +1,8 @@
 package com.project.security.component;
 
 import cn.hutool.json.JSONUtil;
-import com.project.common.api.ApiCodes;
-import com.project.common.api.ApiResult;
+import com.project.core.api.ApiCodes;
+import com.project.core.api.ApiResult;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

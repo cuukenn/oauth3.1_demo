@@ -74,7 +74,7 @@ public class InMemoryOnLineUserServiceImpl implements IOnlineUserService {
 
         private static final long serialVersionUID = 7221818028970209536L;
 
-        public CustomerTimedCache(long timeout) {
+        CustomerTimedCache(long timeout) {
             super(timeout);
         }
 

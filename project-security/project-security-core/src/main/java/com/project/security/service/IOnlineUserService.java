@@ -3,6 +3,8 @@ package com.project.security.service;
 import com.project.security.pojo.TokenPair;
 
 /**
+ * 用户在线服务
+ *
  * @author changgg
  */
 public interface IOnlineUserService {

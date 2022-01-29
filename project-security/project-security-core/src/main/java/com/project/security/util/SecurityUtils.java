@@ -2,7 +2,7 @@ package com.project.security.util;
 
 import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONObject;
-import com.project.common.exception.BizException;
+import com.project.core.exception.BizException;
 import com.project.security.annotation.AnonymousAccess;
 import com.project.security.enums.RequestMethodEnum;
 import lombok.AccessLevel;
@@ -31,6 +31,14 @@ import java.util.Set;
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class SecurityUtils {
+    /**
+     * 判断当前是否存在认证信息
+     *
+     * @return 是否认证
+     */
+    public static boolean hasAuthentication() {
+        return SecurityContextHolder.getContext().getAuthentication() != null;
+    }
 
     /**
      * 获取当前登录的用户

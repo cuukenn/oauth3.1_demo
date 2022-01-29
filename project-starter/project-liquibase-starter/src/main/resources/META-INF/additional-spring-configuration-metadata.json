@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "app.core.liquibase.unlock-when-start",
+      "type": "java.lang.Boolean",
+      "description": "是否在启动时解锁Liquibase数据库."
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 package com.project.ums.server.poj;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.project.common.poj.BaseDTO;
+import com.project.core.base.BaseDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
