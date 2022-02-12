@@ -17,13 +17,14 @@ import java.time.LocalDateTime;
  * @author changgg
  */
 @Data
-@ToString(exclude = {"id"})
+@ToString
 public abstract class AbstractEntity implements BaseEntity {
     private static final long serialVersionUID = -4477750638713111299L;
     /**
      * 主键
      */
     @TableId(value = Constant.ID, type = IdType.AUTO)
+    @ToString.Exclude
     private Long id;
     /**
      * 创建人

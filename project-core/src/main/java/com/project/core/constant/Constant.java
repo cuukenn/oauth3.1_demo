@@ -30,4 +30,20 @@ public final class Constant {
      * 修改者
      */
     public static final String LAST_MODIFIED_BY = "last_modified_by";
+    /**
+     * 超级权限
+     */
+    public static final String ROLE_SUPER_ADMIN = "ROLE_SUPER_ADMIN";
+    /**
+     * 管理员
+     */
+    public static final String ROLE_ADMIN = "ROLE_ADMIN";
+    /**
+     * 普通用户
+     */
+    public static final String ROLE_USER = "ROLE_USER";
+    /**
+     * 初始密码
+     */
+    public static final String INIT_PASSWORD = "1234@Abcd";
 }

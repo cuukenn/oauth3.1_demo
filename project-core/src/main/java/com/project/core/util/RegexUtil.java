@@ -17,8 +17,10 @@ import java.util.regex.Pattern;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class RegexUtil {
     public static final Pattern DOT = Pattern.compile(",");
+    public static final Pattern BLANK = Pattern.compile("\\s+");
     public static final Pattern SPOT = Pattern.compile("\\.");
     public static final Pattern NUMBER = Pattern.compile("-?([0-9]+)(.[0-9]+)?");
+    public static final Pattern MOBILE_PATTERN = Pattern.compile("1\\d{10}");
 
     /**
      * 获取匹配的数据

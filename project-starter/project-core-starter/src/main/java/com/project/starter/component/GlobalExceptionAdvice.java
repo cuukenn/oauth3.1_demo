@@ -23,7 +23,7 @@ public class GlobalExceptionAdvice {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.OK)
     public ApiResult<String> handle(ApiException exception) {
-        log.error("API异常,code:[{}],msg:[{}]", exception.getCode(), exception.getMessage());
+        log.error("API异常,code:[{}],msg:[{}],detail:[{}]", exception.getCode(), exception.getMessage(), exception.getDetail());
         return ApiResult.of(exception.getCode(), exception.getMessage());
     }
 
@@ -31,7 +31,7 @@ public class GlobalExceptionAdvice {
     @ResponseStatus(HttpStatus.OK)
     public ApiResult<Void> handle(BizException exception) {
         log.error("功能异常,code:[{}],msg:[{}]", ApiCodes.ERROR, exception.getMessage());
-        return ApiResult.of(ApiCodes.ERROR);
+        return ApiResult.of(ApiCodes.ERROR, exception.getMessage());
     }
 
     @ExceptionHandler

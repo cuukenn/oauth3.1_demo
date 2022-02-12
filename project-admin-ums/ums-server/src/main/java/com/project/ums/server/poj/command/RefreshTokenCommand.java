@@ -1,4 +1,4 @@
-package com.project.ums.server.poj;
+package com.project.ums.server.poj.command;
 
 import com.project.core.base.BaseCommand;
 import com.project.security.pojo.TokenPair;

@@ -1,4 +1,4 @@
-package com.project.ums.server.poj;
+package com.project.ums.server.poj.query;
 
 import com.project.core.base.BaseQuery;
 import lombok.AllArgsConstructor;

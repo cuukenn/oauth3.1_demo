@@ -18,6 +18,7 @@ package com.project.core.assembler;
 
 import com.project.core.base.BaseDTO;
 import com.project.core.base.BaseEntity;
+import org.mapstruct.MappingTarget;
 
 import java.util.List;
 
@@ -32,32 +33,40 @@ public interface BaseAssembler<D extends BaseDTO, E extends BaseEntity> {
     /**
      * DTO转Entity
      *
-     * @param dto /
-     * @return /
+     * @param dto 传输对象
+     * @return 实体
      */
     E toEntity(D dto);
 
     /**
      * Entity转DTO
      *
-     * @param entity /
-     * @return /
+     * @param entity 实体
+     * @return 传输对象
      */
     D toDto(E entity);
 
     /**
+     * 根据dto更新entity的内容
+     *
+     * @param dto    传输对象
+     * @param entity 实体
+     */
+    void updateEntity(D dto, @MappingTarget E entity);
+
+    /**
      * DTO集合转Entity集合
      *
-     * @param dtoList /
-     * @return /
+     * @param dtoList 传输对象集合
+     * @return 实体集合
      */
     List<E> toEntity(List<D> dtoList);
 
     /**
      * Entity集合转DTO集合
      *
-     * @param entityList /
-     * @return /
+     * @param entityList 实体集合
+     * @return 传输对象集合
      */
     List<D> toDto(List<E> entityList);
 }

@@ -1,6 +1,10 @@
 spring:
   profiles:
     active: @env@
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
 build-info:
   app-name: @project.name@
   app-version: @project.version@

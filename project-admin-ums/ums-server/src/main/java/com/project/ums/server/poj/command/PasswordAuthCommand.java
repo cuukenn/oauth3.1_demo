@@ -1,4 +1,4 @@
-package com.project.ums.server.poj;
+package com.project.ums.server.poj.command;
 
 import com.project.core.base.BaseCommand;
 import lombok.AllArgsConstructor;
@@ -16,7 +16,7 @@ import javax.validation.constraints.NotEmpty;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "password")
+@ToString
 public class PasswordAuthCommand implements BaseCommand {
     private static final long serialVersionUID = 8705202831771159629L;
     /**
@@ -28,6 +28,7 @@ public class PasswordAuthCommand implements BaseCommand {
      * 密码
      */
     @NotEmpty
+    @ToString.Exclude
     private String password;
     /**
      * 验证码ID

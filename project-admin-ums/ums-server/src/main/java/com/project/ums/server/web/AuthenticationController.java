@@ -1,6 +1,7 @@
 package com.project.ums.server.web;
 
 import cn.hutool.crypto.digest.MD5;
+import com.project.core.api.ApiCodes;
 import com.project.core.api.ApiResult;
 import com.project.core.exception.BizException;
 import com.project.core.util.Assert;
@@ -12,16 +13,17 @@ import com.project.security.component.TokenProvider;
 import com.project.security.pojo.TokenPair;
 import com.project.security.service.ICaptchaService;
 import com.project.security.service.IOnlineUserService;
-import com.project.ums.server.poj.AuthUserDTO;
-import com.project.ums.server.poj.CaptchaCodeQuery;
-import com.project.ums.server.poj.CaptchaDTO;
-import com.project.ums.server.poj.PasswordAuthCommand;
-import com.project.ums.server.poj.RefreshTokenCommand;
+import com.project.ums.server.poj.dto.AuthUserDTO;
+import com.project.ums.server.poj.query.CaptchaCodeQuery;
+import com.project.ums.server.poj.dto.CaptchaDTO;
+import com.project.ums.server.poj.command.PasswordAuthCommand;
+import com.project.ums.server.poj.command.RefreshTokenCommand;
 import com.wf.captcha.base.Captcha;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AccountStatusException;
+import org.springframework.security.authentication.CredentialsExpiredException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -81,6 +83,9 @@ public class AuthenticationController {
         } catch (BizException exception) {
             response = ApiResult.fail(exception.getMessage());
             log.error("auth failed,account:[{}],msg:[{}]", command, exception.getMessage());
+        } catch (CredentialsExpiredException exception) {
+            response = ApiResult.of(ApiCodes.FORCE_CHANG_PASSWORD);
+            log.error("auth failed,account:[{}]", command, exception);
         } catch (UsernameNotFoundException exception) {
             response = ApiResult.fail("用户名或密码错误");
             log.error("auth failed,account:[{}]", command, exception);

@@ -1,4 +1,4 @@
-package com.project.ums.server.poj;
+package com.project.ums.server.poj.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.core.base.BaseDTO;

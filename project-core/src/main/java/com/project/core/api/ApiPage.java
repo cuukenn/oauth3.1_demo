@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Data
 @Builder(access = AccessLevel.MODULE)
-public class ApiPage<T extends List<V>, V extends BaseDTO> implements BaseDTO {
+public class ApiPage<V extends BaseDTO> implements BaseDTO {
     private static final long serialVersionUID = -3318767403465787461L;
     /**
      * 分页页码
@@ -29,9 +29,9 @@ public class ApiPage<T extends List<V>, V extends BaseDTO> implements BaseDTO {
     /**
      * 总数据量
      */
-    private Integer total;
+    private Long total;
     /**
      * 当前分页数据
      */
-    private T list;
+    private List<V> list;
 }

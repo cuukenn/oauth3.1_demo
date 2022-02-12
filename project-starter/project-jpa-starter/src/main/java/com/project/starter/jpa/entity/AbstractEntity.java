@@ -18,6 +18,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -30,7 +31,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @RequiredArgsConstructor
-@ToString(exclude = {"id"})
+@ToString
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class AbstractEntity implements BaseEntity {
@@ -41,6 +42,7 @@ public abstract class AbstractEntity implements BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = Constant.ID)
+    @ToString.Exclude
     private Long id;
     /**
      * 创建人
@@ -63,7 +65,7 @@ public abstract class AbstractEntity implements BaseEntity {
     /**
      * 更新时间
      */
-    @Column(name = Constant.LAST_MODIFIED_BY)
+    @Column(name = Constant.LAST_MODIFIED_TIME)
     @LastModifiedDate
     private LocalDateTime lastModifiedTime;
 

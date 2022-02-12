@@ -89,10 +89,10 @@ public class ApiResult<T> implements BaseDTO {
      * @param payload    荷载(集合)
      * @return 结果
      */
-    public static <T extends List<V>, V extends BaseDTO> ApiResult<ApiPage<T, V>> success(int pageNumber, int pageSize, int total, T payload) {
-        return ApiResult.<ApiPage<T, V>>builder()
+    public static <V extends BaseDTO> ApiResult<ApiPage<V>> success(int pageNumber, int pageSize, long total, List<V> payload) {
+        return ApiResult.<ApiPage<V>>builder()
                 .code(ApiCodes.OK.getCode()).message(ApiCodes.OK.getMsg())
-                .payload(ApiPage.<T, V>builder().pageNumber(pageNumber).pageSize(pageSize).total(total).list(payload).build())
+                .payload(ApiPage.<V>builder().pageNumber(pageNumber).pageSize(pageSize).total(total).list(payload).build())
                 .build();
     }
 
