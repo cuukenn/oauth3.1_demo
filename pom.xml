@@ -47,6 +47,7 @@
         <knife4j.version>3.0.3</knife4j.version>
         <!--        升级hibernate时需要和Hibernate版本保持一致-->
         <hibernate-jpamodelgen.version>5.4.27.Final</hibernate-jpamodelgen.version>
+        <smartdoc.version>2.3.7</smartdoc.version>
     </properties>
 
     <!--子项目依赖版本统一管理-->
@@ -142,6 +143,41 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+            <build>
+                <plugins>
+                    <!-- checkstyle插件 ：静态检查代码的格式-->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-checkstyle-plugin</artifactId>
+                        <version>3.1.1</version>
+                        <configuration>
+                            <configLocation>project-build-tools/src/main/resources/checkstyle.xml</configLocation>
+                            <suppressionsLocation>
+                                project-build-tools/src/main/resources/checkstyle-suppression.xml
+                            </suppressionsLocation>
+                            <includeTestSourceDirectory>false</includeTestSourceDirectory>
+                            <consoleOutput>true</consoleOutput>
+                            <failsOnError>true</failsOnError>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>validate</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>com.project</groupId>
+                                <artifactId>project-build-tools</artifactId>
+                                <version>1.0-SNAPSHOT</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
         <profile>
             <id>prod</id>
@@ -152,7 +188,7 @@
                 <resources>
                     <resource>
                         <directory>src/main/resources</directory>
-                        <!--生产包剔除测试环境的相关配置-->
+                        <!--生产包剔除敏感文件-->
                         <excludes>
                             <exclude>**/*-dev.xml</exclude>
                             <exclude>**/*-dev.yml</exclude>
@@ -161,44 +197,13 @@
                             <exclude>**/*-test.yml</exclude>
                             <exclude>**/*-test.yaml</exclude>
                             <exclude>**/*bak</exclude>
+                            <exclude>**/doc/**</exclude>
                         </excludes>
                     </resource>
                 </resources>
             </build>
         </profile>
     </profiles>
-    <build>
-        <plugins>
-            <!-- checkstyle插件 ：静态检查代码的格式-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.1</version>
-                <configuration>
-                    <configLocation>project-build-tools/src/main/resources/checkstyle.xml</configLocation>
-                    <includeTestSourceDirectory>false</includeTestSourceDirectory>
-                    <consoleOutput>true</consoleOutput>
-                    <failsOnError>true</failsOnError>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>validate</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.project</groupId>
-                        <artifactId>project-build-tools</artifactId>
-                        <version>1.0-SNAPSHOT</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-        </plugins>
-    </build>
 
     <!--    设置远程仓库地址为阿里云仓库-->
     <repositories>
