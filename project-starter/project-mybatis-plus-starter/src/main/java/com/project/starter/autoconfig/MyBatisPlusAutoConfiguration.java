@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.IllegalSQLInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import com.project.core.base.BaseEntity;
 import com.project.core.constant.Constant;
 import com.project.security.util.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -64,15 +65,15 @@ public class MyBatisPlusAutoConfiguration {
             @Override
             public void insertFill(MetaObject metaObject) {
                 LocalDateTime now = LocalDateTime.now();
-                this.setFieldValByName(Constant.CREATED_TIME, now, metaObject);
-                this.setFieldValByName(Constant.LAST_MODIFIED_TIME, now, metaObject);
-                this.setFieldValByName(Constant.LAST_MODIFIED_BY, Constant.ANONYMOUS, metaObject);
+                this.setFieldValByName(BaseEntity.CREATED_TIME, now, metaObject);
+                this.setFieldValByName(BaseEntity.LAST_MODIFIED_TIME, now, metaObject);
+                this.setFieldValByName(BaseEntity.LAST_MODIFIED_BY, Constant.ANONYMOUS, metaObject);
             }
 
             @Override
             public void updateFill(MetaObject metaObject) {
-                this.setFieldValByName(Constant.LAST_MODIFIED_TIME, LocalDateTime.now(), metaObject);
-                this.setFieldValByName(Constant.LAST_MODIFIED_BY, Constant.ANONYMOUS, metaObject);
+                this.setFieldValByName(BaseEntity.LAST_MODIFIED_TIME, LocalDateTime.now(), metaObject);
+                this.setFieldValByName(BaseEntity.LAST_MODIFIED_BY, Constant.ANONYMOUS, metaObject);
             }
         };
     }
@@ -91,15 +92,15 @@ public class MyBatisPlusAutoConfiguration {
             @Override
             public void insertFill(MetaObject metaObject) {
                 LocalDateTime now = LocalDateTime.now();
-                this.setFieldValByName(Constant.CREATED_TIME, now, metaObject);
-                this.setFieldValByName(Constant.LAST_MODIFIED_TIME, now, metaObject);
-                this.setFieldValByName(Constant.CREATED_BY, SecurityUtils.hasAuthentication() ? SecurityUtils.getCurrentUsername() : Constant.ANONYMOUS, metaObject);
+                this.setFieldValByName(BaseEntity.CREATED_TIME, now, metaObject);
+                this.setFieldValByName(BaseEntity.LAST_MODIFIED_TIME, now, metaObject);
+                this.setFieldValByName(BaseEntity.CREATED_BY, SecurityUtils.hasAuthentication() ? SecurityUtils.getCurrentUsername() : Constant.ANONYMOUS, metaObject);
             }
 
             @Override
             public void updateFill(MetaObject metaObject) {
-                this.setFieldValByName(Constant.LAST_MODIFIED_TIME, LocalDateTime.now(), metaObject);
-                this.setFieldValByName(Constant.LAST_MODIFIED_BY, SecurityUtils.hasAuthentication() ? SecurityUtils.getCurrentUsername() : Constant.ANONYMOUS, metaObject);
+                this.setFieldValByName(BaseEntity.LAST_MODIFIED_TIME, LocalDateTime.now(), metaObject);
+                this.setFieldValByName(BaseEntity.LAST_MODIFIED_BY, SecurityUtils.hasAuthentication() ? SecurityUtils.getCurrentUsername() : Constant.ANONYMOUS, metaObject);
             }
         };
     }

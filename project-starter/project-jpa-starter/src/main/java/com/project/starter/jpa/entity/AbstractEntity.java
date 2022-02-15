@@ -1,7 +1,6 @@
 package com.project.starter.jpa.entity;
 
 import com.project.core.base.BaseEntity;
-import com.project.core.constant.Constant;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -18,7 +17,6 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Index;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -41,31 +39,31 @@ public abstract class AbstractEntity implements BaseEntity {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = Constant.ID)
+    @Column(name = ID)
     @ToString.Exclude
     private Long id;
     /**
      * 创建人
      */
-    @Column(name = Constant.CREATED_BY)
+    @Column(name = CREATED_BY, nullable = false)
     @CreatedBy
     private String createBy;
     /**
      * 更新人
      */
-    @Column(name = Constant.LAST_MODIFIED_BY)
+    @Column(name = LAST_MODIFIED_BY, nullable = false)
     @LastModifiedBy
     private String lastModifiedBy;
     /**
      * 创建时间
      */
-    @Column(name = Constant.CREATED_TIME)
+    @Column(name = CREATED_TIME, nullable = false)
     @CreatedDate
     private LocalDateTime createTime;
     /**
      * 更新时间
      */
-    @Column(name = Constant.LAST_MODIFIED_TIME)
+    @Column(name = LAST_MODIFIED_TIME, nullable = false)
     @LastModifiedDate
     private LocalDateTime lastModifiedTime;
 

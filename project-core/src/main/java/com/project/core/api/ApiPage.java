@@ -15,7 +15,7 @@ import java.util.List;
  * @see ApiResult
  */
 @Data
-@Builder(access = AccessLevel.MODULE)
+@Builder(access = AccessLevel.PACKAGE)
 public class ApiPage<V extends BaseDTO> implements BaseDTO {
     private static final long serialVersionUID = -3318767403465787461L;
     /**

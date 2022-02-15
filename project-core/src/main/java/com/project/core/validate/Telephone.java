@@ -20,7 +20,7 @@ import java.lang.annotation.Target;
 public @interface Telephone {
     boolean required() default false;
 
-    String message() default "{javax.validation.constraints.NotNull.message}";
+    String message() default "{手机号格式不正确}";
 
     Class<?>[] groups() default {};
 

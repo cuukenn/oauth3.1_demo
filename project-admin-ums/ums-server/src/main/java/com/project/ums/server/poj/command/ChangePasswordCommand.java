@@ -5,6 +5,7 @@ import com.project.core.constant.Constant;
 import com.project.core.exception.BizException;
 import com.project.core.util.Assert;
 import lombok.Data;
+import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
 import java.util.Objects;
@@ -21,16 +22,19 @@ public class ChangePasswordCommand implements BaseCommand {
      * 旧密码
      */
     @NotBlank
+    @ToString.Exclude
     private String oldPassword;
     /**
      * 新密码
      */
     @NotBlank
+    @ToString.Exclude
     private String newPassword;
     /**
      * 新密码二次确认
      */
     @NotBlank
+    @ToString.Exclude
     private String newPasswordConfirm;
 
     /**

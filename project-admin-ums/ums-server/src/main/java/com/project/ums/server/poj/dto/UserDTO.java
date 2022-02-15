@@ -8,7 +8,7 @@ import lombok.ToString;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  * 用户实体传输对象
@@ -51,5 +51,5 @@ public class UserDTO implements BaseDTO {
     /**
      * 出生日期
      */
-    private LocalDateTime birthDate;
+    private LocalDate birthDate;
 }

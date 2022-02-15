@@ -21,7 +21,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Set;
 
 /**
@@ -41,14 +41,14 @@ public class User extends AbstractEntity {
     /**
      * 用户名
      */
-    @Column(name = "username", unique = true)
+    @Column(name = "username", unique = true, nullable = false)
     @Max(12)
     private String username;
     /**
      * 密码
      */
     @ToString.Exclude
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     @Max(128)
     private String password;
     /**
@@ -83,7 +83,7 @@ public class User extends AbstractEntity {
     /**
      * 昵称
      */
-    @Column(name = "nick_name")
+    @Column(name = "nick_name", nullable = false)
     @Max(12)
     private String nickName;
     /**
@@ -95,18 +95,28 @@ public class User extends AbstractEntity {
     /**
      * 手机号
      */
-    @Column(name = "telephone")
+    @Column(name = "telephone", unique = true)
     @Telephone
     private String telephone;
     /**
      * 电子邮件地址
      */
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     @Email
     private String email;
     /**
      * 出生日期
      */
     @Column(name = "birth_date")
-    private LocalDateTime birthDate;
+    private LocalDate birthDate;
+
+    @Override
+    public boolean equals(Object o) {
+        return super.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }

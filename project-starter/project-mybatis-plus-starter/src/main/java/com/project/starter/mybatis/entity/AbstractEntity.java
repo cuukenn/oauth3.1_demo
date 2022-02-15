@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.project.core.base.BaseEntity;
-import com.project.core.constant.Constant;
 import lombok.Data;
 import lombok.ToString;
 
@@ -23,27 +22,27 @@ public abstract class AbstractEntity implements BaseEntity {
     /**
      * 主键
      */
-    @TableId(value = Constant.ID, type = IdType.AUTO)
+    @TableId(value = ID, type = IdType.AUTO)
     @ToString.Exclude
     private Long id;
     /**
      * 创建人
      */
-    @TableField(value = Constant.CREATED_BY, fill = FieldFill.INSERT)
+    @TableField(value = CREATED_BY, fill = FieldFill.INSERT)
     private String createBy;
     /**
      * 更新人
      */
-    @TableField(value = Constant.LAST_MODIFIED_BY, fill = FieldFill.INSERT_UPDATE)
+    @TableField(value = LAST_MODIFIED_BY, fill = FieldFill.INSERT_UPDATE)
     private String lastModifiedBy;
     /**
      * 创建时间
      */
-    @TableField(value = Constant.CREATED_TIME, fill = FieldFill.INSERT)
+    @TableField(value = CREATED_TIME, fill = FieldFill.INSERT)
     private LocalDateTime createTime;
     /**
      * 更新时间
      */
-    @TableField(value = Constant.LAST_MODIFIED_TIME, fill = FieldFill.INSERT_UPDATE)
+    @TableField(value = LAST_MODIFIED_TIME, fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime lastModifiedTime;
 }

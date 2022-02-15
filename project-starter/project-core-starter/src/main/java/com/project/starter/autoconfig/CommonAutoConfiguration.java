@@ -11,10 +11,12 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import com.project.core.util.DateUtil;
+import com.project.starter.component.ApplicationController;
 import com.project.starter.config.BuildInfoProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -51,5 +53,17 @@ public class CommonAutoConfiguration {
         deserializers.put(LocalDate.class, new LocalDateDeserializer(DateUtil.PATTERN5));
         deserializers.put(LocalTime.class, new LocalTimeDeserializer(DateUtil.PATTERN8));
         return builder -> builder.serializersByType(serializers).deserializersByType(deserializers);
+    }
+
+    /**
+     * 注册默认的/处理器
+     *
+     * @param buildInfoProperties 项目信息
+     * @param serverProperties    服务器信息
+     * @return api
+     */
+    @Bean
+    public ApplicationController applicationController(BuildInfoProperties buildInfoProperties, ServerProperties serverProperties) {
+        return new ApplicationController(buildInfoProperties, serverProperties);
     }
 }

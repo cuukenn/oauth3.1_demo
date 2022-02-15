@@ -11,6 +11,27 @@ import java.time.LocalDateTime;
  */
 public interface BaseEntity extends Serializable {
     /**
+     * 主键列名
+     */
+    String ID = "id";
+    /**
+     * 创建时间
+     */
+    String CREATED_TIME = "create_time";
+    /**
+     * 创建者
+     */
+    String CREATED_BY = "create_by";
+    /**
+     * 最近修改时间
+     */
+    String LAST_MODIFIED_TIME = "last_modified_time";
+    /**
+     * 修改者
+     */
+    String LAST_MODIFIED_BY = "last_modified_by";
+
+    /**
      * 实体主键
      *
      * @return 主键

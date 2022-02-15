@@ -15,7 +15,7 @@ import java.util.List;
  * @see ApiCode,ApiCodes,ApiCodeWrapper,ApiPage
  */
 @Data
-@Builder(access = AccessLevel.MODULE)
+@Builder(access = AccessLevel.PRIVATE)
 public class ApiResult<T> implements BaseDTO {
     private static final long serialVersionUID = -5205542432444366520L;
     /**

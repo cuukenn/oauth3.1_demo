@@ -22,7 +22,7 @@ public class RoleDTO implements BaseDTO {
      */
     private Long id;
     /**
-     * 用户名
+     * 角色名
      */
     @Max(20)
     private String role;
