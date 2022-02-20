@@ -43,6 +43,16 @@
                 <artifactId>project-liquibase-starter</artifactId>
                 <version>${revision}</version>
             </dependency>
+            <dependency>
+                <groupId>com.project</groupId>
+                <artifactId>admin-ums-api</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.project</groupId>
+                <artifactId>auth-api</artifactId>
+                <version>${revision}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

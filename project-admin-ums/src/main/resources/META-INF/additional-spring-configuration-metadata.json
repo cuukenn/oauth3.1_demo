@@ -1,8 +1,0 @@
-{
-  "properties": [
-    {
-      "name": "app.log.path",
-      "type": "java.lang.String",
-      "description": "Description for app.log.path."
-  }
-] }

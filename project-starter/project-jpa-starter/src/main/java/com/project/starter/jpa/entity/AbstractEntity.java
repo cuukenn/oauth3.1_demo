@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -38,7 +39,8 @@ public abstract class AbstractEntity implements BaseEntity {
      * 主键
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "custom-generator")
+    @GenericGenerator(name = "custom-generator", strategy = "com.project.starter.jpa.entity.ManualInsertGenerator")
     @Column(name = ID)
     @ToString.Exclude
     private Long id;

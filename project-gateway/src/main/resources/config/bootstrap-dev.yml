@@ -1,0 +1,24 @@
+spring:
+  cloud:
+    nacos:
+      # 注册中心
+      discovery:
+        server-addr: http://192.168.71.128:8848
+        ip: 127.0.0.1
+      username: nacos
+      password: nacos
+  security:
+    oauth2:
+      client:
+        registration:
+          system-client-oidc:
+            provider: spring
+            client-id: system-client
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:8080/login/oauth2/code/{registrationId}"
+            scope: openid
+            client-name: system-oidc
+        provider:
+          spring:
+            issuer-uri: http://127.0.0.1:8090

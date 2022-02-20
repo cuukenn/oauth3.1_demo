@@ -8,18 +8,10 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
     <artifactId>project-auth</artifactId>
-    <name>${artifactId}</name>
-    <dependencies>
-        <dependency>
-            <groupId>com.project</groupId>
-            <artifactId>project-core-starter</artifactId>
-        </dependency>
-        <!--        验证码-->
-        <dependency>
-            <groupId>com.github.whvcse</groupId>
-            <artifactId>easy-captcha</artifactId>
-            <optional>true</optional>
-        </dependency>
-    </dependencies>
+    <modules>
+        <module>auth-api</module>
+        <module>auth-boot</module>
+    </modules>
 </project>

@@ -31,7 +31,7 @@ public final class ApiCodes {
      */
     public static final ApiCode FORCE_CHANG_PASSWORD = new ApiCodeWrapper("FORBIDDEN", "用户密码过期、需修改密码后方可登陆");
     /**
-     * 账户密码过期、强制修改密码
+     * 认证失败
      */
-    public static final ApiCode AUTH_FAILED = new ApiCodeWrapper("AUTH_FAILED", "认证信息错误");
+    public static final ApiCode AUTH_FAILED = new ApiCodeWrapper("AUTH_FAILED", "认证失败");
 }

@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/cuukenn?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+    hikari:
+      minimum-idle: 10
+      maximum-pool-size: 20
+    #自动创建oauth的相关表需要移掉注释
+    #initialization-mode: always
+    schema:
+      - classpath:org/springframework/security/oauth2/server/authorization/client/oauth2-registered-client-schema.sql
+      - classpath:org/springframework/security/oauth2/server/authorization/oauth2-authorization-schema.sql
+      - classpath:org/springframework/security/oauth2/server/authorization/oauth2-authorization-consent-schema.sql
+    data:
+      - classpath:data/oauth2-registered-client-data.sql
+app:
+  jwt:
+    private-secret: MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCsXiE4YBe7kxvzhqkCPCEjTbHTXQw9YOXAYERHDjeZ7Z38OpyBXRLibnab8y4GUEUieP0DL4TolDb4Jm4qpq9sG38kGjs+/G9lOYwsWC9CNbkF8LZcFGLnWPa8rd7VyNf2M5P1dnA7ioXiEufaAufIYgdN4dL2e8+FUFI9jxbBtsp1Qgb/uSL8h6c7OCda7HfE/W6MmlxmC9RHO6p0qSVjZ6++k5e3w8D61G8zgJLuUL4a5xUVuVK5ZMAar29aDdWuX0LILV+DCbZea4RCyFAw/pOBzGo8S4vpbNOYR5GmMLVirttfZb3XGnjvlsWFnnNrn+Ut0QefW31dWp4XVxhbAgMBAAECggEAQ8pViGWKj/QghxuL9twNMGRLLtSmjrFASvPRhpyZ04k3nE605M/lMHa/YUA39rW1KwSohYs3230HTXtX0qBx17PMwjcq2+/OI+KJNZuNIp4cYbC1F+vQpipACB7dx/jQrvzEEUL+ivxFAY/r7bs8y3t6YfAR120ERes8HQfcrFyAtUaWX2sZONmH3jjfw+2KEIu91vXmK03PJvWNXfCXS4jyYU+J8GxS7lsHMl50Zr+LmgUI9qYmWFgAIGBNVYdPSrb02N0MW0qKYo+jeJeVbMLLTHF8UJN6tyJhuiaiwLriIAXmKvvBvINjs8HXpKFVgEiNKHTMaaNoven0DxPeKQKBgQDm3ksep7R8uN041b/cQ0CQD2rvb723qubT2frmRbad+9Cvo07BzAGJhyr6g0iaJnDTcWgJoGa3lzMh2HwUsULTLBjpheKh35ORoHviCqXF2C4h4d0nfUvoPQzSJxEktwpcFzS/yqL9U/n0lfCPi9qvvjD85wvDtbWlPsRcC7t5dQKBgQC/IZLxx33OCvxVjHdFPAeocN+x6JJraSzS2cOg5lB25W/okyZzail1EuJIJhszZeUeGtM/0s/9KyEYsBriYhwY59Fzv+oMr0004/nNx3l52KXvEJtG+f9RkYcPXycFk7p3vNd/Vx9zfG540UvBVAw6SlwmsJFZ+jx4goRSJR1AjwKBgA44oT35LKgGJzJqEFB8IAz/tiGbq38V2vQv2EG5B5/BtEAteht7+phDKEWYMq+0MH0F3lfBdrJWcQLjt/j6Vlh1ve8cnTJFeGyfCyKIb1+5ilXx+NKG6Fcc8546Y9b0I4I6t7gcvl+Gfb4wQkpFXio3OANMJDBhEBhmvmfBHUJFAoGBAKkk/zP1BcKoOjNDQfIFdAl/CpgZaCqiQ0a97MCh0ifGWEkMoISXOOUgtxx+jKfpzt/bgYQD/ojf+EQu5Tve81qfHN9AwdJD+SGLd3DCzSAluINewOwJJgh7r3jNDm2DFQwOFO/enDjJr8JABriqtr+HOxIKRDfKmmVTq+I+cirFAoGBANZPTEEM4iagDldi2y8SUuHy5fLqt/iZb0eMi02MEt9RTERNL2Tlavv38sP+NN0Bfq38Bt8MZ72EO6nXIEPrqE7x6JB5Up6zIlxiah1OXR2mngPK9+Ln4IxEJ1G9I9yoY+iUbPxvwSLdBjadxsjNuvwfer2GC5ciEczSl4KIMR8s
+    public-secret: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArF4hOGAXu5Mb84apAjwhI02x010MPWDlwGBERw43me2d/DqcgV0S4m52m/MuBlBFInj9Ay+E6JQ2+CZuKqavbBt/JBo7PvxvZTmMLFgvQjW5BfC2XBRi51j2vK3e1cjX9jOT9XZwO4qF4hLn2gLnyGIHTeHS9nvPhVBSPY8WwbbKdUIG/7ki/IenOzgnWux3xP1ujJpcZgvURzuqdKklY2evvpOXt8PA+tRvM4CS7lC+GucVFblSuWTAGq9vWg3Vrl9CyC1fgwm2XmuEQshQMP6TgcxqPEuL6WzTmEeRpjC1Yq7bX2W91xp475bFhZ5za5/lLdEHn1t9XVqeF1cYWwIDAQAB
