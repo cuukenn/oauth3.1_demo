@@ -4,7 +4,6 @@ import cn.hutool.core.date.BetweenFormatter;
 import cn.hutool.core.date.DateUtil;
 import com.project.core.api.ApiResult;
 import com.project.core.base.BaseDTO;
-import com.project.security.annotation.GetAnonymousAccess;
 import com.project.starter.config.BuildInfoProperties;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +34,6 @@ public class ApplicationController {
      * @return info
      */
     @GetMapping(value = "/")
-    @GetAnonymousAccess
     public ApiResult<AppInfo> hello() {
         return ApiResult.success(new AppInfo(buildInfoProperties.getAppName(), buildInfoProperties.getAppVersion(), serverProperties.getPort(), uptime));
     }

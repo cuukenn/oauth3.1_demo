@@ -15,10 +15,8 @@
         <module>project-core-starter</module>
         <module>project-mybatis-plus-starter</module>
         <module>project-jpa-starter</module>
-        <module>project-security-starter</module>
         <module>project-swagger-starter</module>
         <module>project-liquibase-starter</module>
-        <module>project-redis-starter</module>
     </modules>
     <dependencies>
         <dependency>

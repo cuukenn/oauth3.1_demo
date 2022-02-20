@@ -5,7 +5,6 @@
 | project-build-tools  |       项目构建配置文件存放位置       |
 | project-dependencies |  项目各个模块及子模块的全局版本控制  |
 |     project-core     |             项目基础模块             |
-|   project-security   |             项目安全模块             |
 |   project-starter    | 结合springboot提供的各种自动配置模块 |
 |   project-gateway    |               项目网关               |
 |  project-admin-ums   |             用户管理服务             |

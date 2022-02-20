@@ -20,22 +20,7 @@
             </dependency>
             <dependency>
                 <groupId>com.project</groupId>
-                <artifactId>project-security-annotation</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.project</groupId>
-                <artifactId>project-security-core</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.project</groupId>
                 <artifactId>project-core-starter</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.project</groupId>
-                <artifactId>project-security-starter</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>

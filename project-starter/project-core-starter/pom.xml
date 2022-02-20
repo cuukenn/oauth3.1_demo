@@ -34,8 +34,8 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>com.project</groupId>
-            <artifactId>project-security-annotation</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -23,10 +23,5 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.project</groupId>
-            <artifactId>project-security-core</artifactId>
-            <optional>true</optional>
-        </dependency>
     </dependencies>
 </project>

@@ -8,12 +8,9 @@ import com.baomidou.mybatisplus.extension.plugins.inner.IllegalSQLInnerIntercept
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.project.core.base.BaseEntity;
 import com.project.core.constant.Constant;
-import com.project.security.util.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -58,7 +55,6 @@ public class MyBatisPlusAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean(MetaObjectHandler.class)
-    @ConditionalOnMissingClass("com.project.security.util.SecurityUtils")
     public MetaObjectHandler timeMetaObjectWithoutSecurity() {
         log.info("register mataObjectHandler without security");
         return new MetaObjectHandler() {
@@ -74,33 +70,6 @@ public class MyBatisPlusAutoConfiguration {
             public void updateFill(MetaObject metaObject) {
                 this.setFieldValByName(BaseEntity.LAST_MODIFIED_TIME, LocalDateTime.now(), metaObject);
                 this.setFieldValByName(BaseEntity.LAST_MODIFIED_BY, Constant.ANONYMOUS, metaObject);
-            }
-        };
-    }
-
-    /**
-     * 创建时间、更新时间自动填充
-     *
-     * @return 时间元数据自动填充
-     */
-    @Bean
-    @ConditionalOnMissingBean(MetaObjectHandler.class)
-    @ConditionalOnClass(SecurityUtils.class)
-    public MetaObjectHandler timeMetaObjectInSecurity() {
-        log.info("register mataObjectHandler in security");
-        return new MetaObjectHandler() {
-            @Override
-            public void insertFill(MetaObject metaObject) {
-                LocalDateTime now = LocalDateTime.now();
-                this.setFieldValByName(BaseEntity.CREATED_TIME, now, metaObject);
-                this.setFieldValByName(BaseEntity.LAST_MODIFIED_TIME, now, metaObject);
-                this.setFieldValByName(BaseEntity.CREATED_BY, SecurityUtils.hasAuthentication() ? SecurityUtils.getCurrentUsername() : Constant.ANONYMOUS, metaObject);
-            }
-
-            @Override
-            public void updateFill(MetaObject metaObject) {
-                this.setFieldValByName(BaseEntity.LAST_MODIFIED_TIME, LocalDateTime.now(), metaObject);
-                this.setFieldValByName(BaseEntity.LAST_MODIFIED_BY, SecurityUtils.hasAuthentication() ? SecurityUtils.getCurrentUsername() : Constant.ANONYMOUS, metaObject);
             }
         };
     }

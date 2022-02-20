@@ -1,0 +1,19 @@
+{
+  "properties": [
+    {
+      "name": "app.log.path",
+      "type": "java.lang.String",
+      "description": "日志文件c."
+    },
+    {
+      "name": "build-info.app-name",
+      "type": "java.lang.String",
+      "description": "程序名称."
+    },
+    {
+      "name": "build-info.app-version",
+      "type": "java.lang.String",
+      "description": "程序版本."
+    }
+  ]
+}
