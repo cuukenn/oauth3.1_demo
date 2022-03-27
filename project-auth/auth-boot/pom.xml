@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>project-auth</artifactId>
-        <groupId>com.project</groupId>
+        <groupId>com.cuukenn</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -41,15 +41,15 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.project</groupId>
+            <groupId>com.cuukenn</groupId>
             <artifactId>project-core-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.project</groupId>
+            <groupId>com.cuukenn</groupId>
             <artifactId>admin-ums-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.project</groupId>
+            <groupId>com.cuukenn</groupId>
             <artifactId>auth-api</artifactId>
         </dependency>
         <dependency>

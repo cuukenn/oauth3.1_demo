@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.project.starter.autoconfig.LiquibaseAutoConfiguration
+com.cuukenn.starter.autoconfig.LiquibaseAutoConfiguration

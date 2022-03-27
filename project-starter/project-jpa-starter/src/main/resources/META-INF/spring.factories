@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.project.starter.autoconfig.JpAutoConfiguration
+com.cuukenn.starter.autoconfig.JpAutoConfiguration
