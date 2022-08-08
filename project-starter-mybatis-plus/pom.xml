@@ -3,28 +3,26 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>project-auth</artifactId>
+        <artifactId>project-starter</artifactId>
         <groupId>com.cuukenn</groupId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../project-starter/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>auth-api</artifactId>
+    <description>用于注册mybatis-plus相关bean</description>
+    <artifactId>project-starter-mybatis-plus</artifactId>
     <dependencies>
         <dependency>
             <groupId>com.cuukenn</groupId>
-            <artifactId>project-core-starter</artifactId>
+            <artifactId>project-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.ben-manes.caffeine</groupId>
-            <artifactId>caffeine</artifactId>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
     </dependencies>
 </project>

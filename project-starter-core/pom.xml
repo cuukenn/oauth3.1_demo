@@ -6,9 +6,10 @@
         <artifactId>project-starter</artifactId>
         <groupId>com.cuukenn</groupId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../project-starter/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>project-core-starter</artifactId>
+    <artifactId>project-starter-core</artifactId>
     <description>用于自动注册core包组件</description>
     <dependencies>
         <dependency>

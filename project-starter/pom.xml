@@ -12,11 +12,11 @@
     <artifactId>project-starter</artifactId>
     <description>用于自动向spring注册各类bean</description>
     <modules>
-        <module>project-core-starter</module>
-        <module>project-mybatis-plus-starter</module>
-        <module>project-jpa-starter</module>
-        <module>project-swagger-starter</module>
-        <module>project-liquibase-starter</module>
+        <module>../project-starter-core</module>
+        <module>../project-starter-mybatis-plus</module>
+        <module>../project-starter-jpa</module>
+        <module>../project-starter-swagger</module>
+        <module>../project-starter-liquibase</module>
     </modules>
     <dependencies>
         <dependency>

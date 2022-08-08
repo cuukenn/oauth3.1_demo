@@ -20,27 +20,27 @@
             </dependency>
             <dependency>
                 <groupId>com.cuukenn</groupId>
-                <artifactId>project-core-starter</artifactId>
+                <artifactId>project-starter-core</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.cuukenn</groupId>
-                <artifactId>project-mybatis-plus-starter</artifactId>
+                <artifactId>project-starter-mybatis-plus</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.cuukenn</groupId>
-                <artifactId>project-jpa-starter</artifactId>
+                <artifactId>project-starter-jpa</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.cuukenn</groupId>
-                <artifactId>project-swagger-starter</artifactId>
+                <artifactId>project-starter-swagger</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.cuukenn</groupId>
-                <artifactId>project-liquibase-starter</artifactId>
+                <artifactId>project-starter-liquibase</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
