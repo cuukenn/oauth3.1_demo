@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.cuukenn.starter.autoconfig.ApiAutoConfiguration,\
+com.cuukenn.starter.autoconfig.CommonAutoConfiguration,\
+com.cuukenn.starter.autoconfig.GlobalExceptionAutoConfiguration

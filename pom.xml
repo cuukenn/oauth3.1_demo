@@ -4,13 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <modules>
-        <module>project-build-tools</module>
         <module>project-dependencies</module>
         <module>project-core</module>
-        <module>project-security</module>
         <module>project-starter</module>
         <module>project-gateway</module>
-        <module>project-admin-ums</module>
+        <module>auth-api</module>
+        <module>auth-boot</module>
+        <module>admin-ums-api</module>
+        <module>admin-ums-boot</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -18,8 +19,8 @@
         <version>2.4.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.project</groupId>
-    <artifactId>project-no-name</artifactId>
+    <groupId>com.cuukenn</groupId>
+    <artifactId>project-system</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <description>父POM</description>
@@ -35,7 +36,12 @@
         <!--跳过测试-->
         <maven.test.skip>true</maven.test.skip>
         <!-- *************************三方依赖版本号**************************************-->
+        <spring-cloud.version>2020.0.1</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
+        <spring-cloud-starter-bootsratp.version>3.1.0</spring-cloud-starter-bootsratp.version>
+        <!--为了匹配spring oauth server需要升级spring-security-->
+        <spring-security.version>5.6.2</spring-security.version>
+        <spring-security-oauth2-authorization-server.version>0.2.2</spring-security-oauth2-authorization-server.version>
         <hutool.version>5.7.19</hutool.version>
         <fastjson.version>1.2.79</fastjson.version>
         <guava.version>31.0.1-jre</guava.version>
@@ -47,6 +53,7 @@
         <knife4j.version>3.0.3</knife4j.version>
         <!--        升级hibernate时需要和Hibernate版本保持一致-->
         <hibernate-jpamodelgen.version>5.4.27.Final</hibernate-jpamodelgen.version>
+        <smartdoc.version>2.3.7</smartdoc.version>
     </properties>
 
     <!--子项目依赖版本统一管理-->
@@ -54,9 +61,17 @@
         <dependencies>
             <!--项目依赖版本-->
             <dependency>
-                <groupId>com.project</groupId>
+                <groupId>com.cuukenn</groupId>
                 <artifactId>project-dependencies</artifactId>
                 <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--spring cloud依赖控制-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -67,6 +82,17 @@
                 <version>${spring-cloud-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <!--spring-cloud-starter-bootstrap-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-bootstrap</artifactId>
+                <version>${spring-cloud-starter-bootsratp.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-oauth2-authorization-server</artifactId>
+                <version>${spring-security-oauth2-authorization-server.version}</version>
             </dependency>
             <!--Java工具集-->
             <dependency>
@@ -152,7 +178,7 @@
                 <resources>
                     <resource>
                         <directory>src/main/resources</directory>
-                        <!--生产包剔除测试环境的相关配置-->
+                        <!--生产包剔除敏感文件-->
                         <excludes>
                             <exclude>**/*-dev.xml</exclude>
                             <exclude>**/*-dev.yml</exclude>
@@ -161,43 +187,33 @@
                             <exclude>**/*-test.yml</exclude>
                             <exclude>**/*-test.yaml</exclude>
                             <exclude>**/*bak</exclude>
+                            <exclude>**/doc/**</exclude>
                         </excludes>
                     </resource>
                 </resources>
             </build>
         </profile>
     </profiles>
+
     <build>
-        <plugins>
-            <!-- checkstyle插件 ：静态检查代码的格式-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.1</version>
-                <configuration>
-                    <configLocation>project-build-tools/src/main/resources/checkstyle.xml</configLocation>
-                    <includeTestSourceDirectory>false</includeTestSourceDirectory>
-                    <consoleOutput>true</consoleOutput>
-                    <failsOnError>true</failsOnError>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>validate</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.project</groupId>
-                        <artifactId>project-build-tools</artifactId>
-                        <version>1.0-SNAPSHOT</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-        </plugins>
+        <resources>
+            <resource>
+                <!--将bootstrap配置文件列入maven变量替换范围-->
+                <directory>${basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/bootstrap*.yml</include>
+                </includes>
+            </resource>
+            <resource>
+                <!--将bootstrap配置文件之外的文件也列为资源文件进行打包-->
+                <directory>${basedir}/src/main/resources</directory>
+                <filtering>false</filtering>
+                <excludes>
+                    <exclude>**/bootstrap*.yml</exclude>
+                </excludes>
+            </resource>
+        </resources>
     </build>
 
     <!--    设置远程仓库地址为阿里云仓库-->

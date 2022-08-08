@@ -1,0 +1,13 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: @project.name@
+  profiles:
+    active: @env@
+build-info:
+  app-name: @project.name@
+  app-version: @project.version@
+app:
+  log:
+    path: works/logs

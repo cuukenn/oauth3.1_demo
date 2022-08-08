@@ -1,0 +1,19 @@
+{
+  "allInOne": true,
+  "outPath": "src/main/resources/static/doc",
+  "coverOld": true,
+  "createDebugPage": true,
+  "sortByTitle": false,
+  "showAuthor": true,
+  "allInOneDocFileName": "index.html",
+  "requestHeaders": [
+    {
+      "name": "Authorization",
+      "type": "string",
+      "desc": "JWT认证头(全局),需认证的API需先登陆获取到token后携带,无需认证的API无需携带,请求头名称和前缀可能会变化,具体由后端控制",
+      "value": "Bearer JWT字符串",
+      "required": false,
+      "since": "-"
+    }
+  ]
+}

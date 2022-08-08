@@ -3,8 +3,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>project-no-name</artifactId>
-        <groupId>com.project</groupId>
+        <artifactId>project-system</artifactId>
+        <groupId>com.cuukenn</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -12,13 +12,11 @@
     <artifactId>project-starter</artifactId>
     <description>用于自动向spring注册各类bean</description>
     <modules>
-        <module>project-core-starter</module>
-        <module>project-mybatis-plus-starter</module>
-        <module>project-jpa-starter</module>
-        <module>project-security-starter</module>
-        <module>project-swagger-starter</module>
-        <module>project-liquibase-starter</module>
-        <module>project-redis-starter</module>
+        <module>../project-starter-core</module>
+        <module>../project-starter-mybatis-plus</module>
+        <module>../project-starter-jpa</module>
+        <module>../project-starter-swagger</module>
+        <module>../project-starter-liquibase</module>
     </modules>
     <dependencies>
         <dependency>
